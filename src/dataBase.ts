@@ -26,6 +26,31 @@ export const users: TUser[] = [
 
 ]
 
+  export const createUser = (id: string, name: string, email: string, password: string):string => {
+
+    const createdAt = new Date().toISOString()
+
+    const newUser: TUser = { 
+        id: id,
+        name: name,
+        email: email,
+        password: password,
+        createdAt: createdAt
+    }
+
+    users.push(newUser)
+
+    return "Cadastro realizado com sucesso"
+
+  } 
+
+  export const getAllUsers = ():TUser[] => {
+
+    return users
+
+  }
+
+
 export const products: TProduct[] = [
 
     {
@@ -45,5 +70,33 @@ export const products: TProduct[] = [
 
 ]
 
+export const createProduct = (id: string, name: string, price: number, description: string, imageUrl: string):string => {
 
-//
+    const newProduct: TProduct = { 
+        id: id,
+        name: name,
+        price: price,
+        description: description,
+        imageUrl: 'https://picsum.photos/seed/Monitor/400',
+    }
+
+    products.push(newProduct)
+
+    return "Produto criado com sucesso"
+
+  } 
+
+  export const getAllProduct = ():TProduct[] => {
+
+    return products
+
+  }
+
+  export const searchProductsByName = (name: string):TProduct[] => {
+
+    const filterProducts = products.filter((product)=>{
+        return product.name.toLowerCase().includes(name.toLowerCase())
+    })
+    
+    return filterProducts
+  }
