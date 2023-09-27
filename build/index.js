@@ -35,20 +35,16 @@ app.get("/users", (req, res) => {
 // Busca por produtos 
 app.get("/products", (req, res) => {
     try {
-        const productByName = req.query.productByName;
-        if (typeof productByName === "undefined") {
-            res.status(200).send(dataBase_1.products);
-            return;
-        }
-        if (typeof productByName === "string" && productByName.length > 2) {
-            throw new Error("O nome do produto deve conter ao menos 2 caracteres");
-        }
-        const filterOfTheProduct = dataBase_1.products.filter((product) => product.name.toLowerCase() === productByName.toLowerCase());
-        res.status(200).send(filterOfTheProduct);
+        const result = dataBase_1.products;
+        res.status(200).send(result);
     }
     catch (error) {
-        console.log(error);
-        res.status(400).send(error.messageww);
+        if (error instanceof Error) {
+            res.send(error.message);
+        }
+        else {
+            res.send("Erro no produtos");
+        }
     }
 });
 // Procurando produto por query 
@@ -200,3 +196,5 @@ app.put("/products/:id", (req, res) => {
         res.status(500).send(error.message);
     }
 });
+////////////
+//
