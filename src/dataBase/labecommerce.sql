@@ -129,3 +129,5 @@ VALUES (
         'Prova de que o dinheiro compra tempo',
         'https://picsum.photos/seed/Monitor/400'
     );
+
+--
