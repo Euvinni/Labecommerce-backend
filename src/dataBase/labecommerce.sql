@@ -57,7 +57,7 @@ INSERT INTO
         created_at
     )
 VALUES (
-        'u004',
+        'u001',
         'SpaceToday',
         'space_today@email',
         'idkfa',
@@ -67,7 +67,7 @@ VALUES (
             'localtime'
         )
     ), (
-        'u005',
+        'u002',
         'franklin',
         'franklin@email',
         '123qwe',
@@ -77,7 +77,7 @@ VALUES (
             'localtime'
         )
     ), (
-        'u006',
+        'u003',
         'ciriguelo',
         'ciriguelo@email',
         'qwe123',
@@ -87,6 +87,10 @@ VALUES (
             'localtime'
         )
     );
+
+-- Deletando um usuário específico
+
+DELETE FROM users WHERE id = 'u002';
 
 -- Criando 5 produtos novos
 
@@ -99,35 +103,57 @@ INSERT INTO
         image_Url
     )
 VALUES (
-        'prod003',
+        'prod001',
         'Placa de vídeo RTX 4090Ti',
         18.999,
         'Roda tudo',
         'https://picsum.photos/seed/Mouse%20gamer/400'
     ), (
-        'prod004',
+        'prod002',
         'Echo Dot 5ª geração Amazon',
         359.99,
         'Escuta tudo',
         'https://picsum.photos/seed/Mouse%20gamer/400'
     ), (
-        'prod005',
+        'prod003',
         'Teclado Mecânico Gamer HyperX',
         429.99,
         'Nem o Frank Aguiar tem um assim',
         'https://picsum.photos/seed/Monitor/400'
     ), (
-        'prod006',
+        'prod004',
         'Apple Watch S8',
         5849.10,
         'Prefiro gastar na RTX 4090Ti, pelo menos roda tudo',
         'https://picsum.photos/seed/Mouse%20gamer/400'
     ), (
-        'prod007',
+        'prod005',
         'SSD 1TB Kingston KC3000',
         549.99,
         'Prova de que o dinheiro compra tempo',
         'https://picsum.photos/seed/Monitor/400'
+    ), (
+        'prod006',
+        'Pasta térmica',
+        89.99,
+        'Cuidados com o superaquecimento',
+        'https://picsum.photos/seed/Monitor/400'
     );
 
---
+-- Filtando produto por name
+
+SELECT * FROM products WHERE name = 'Placa de vídeo RTX 4090Ti';
+
+-- Editando o produto pelo preço
+
+UPDATE products SET price = 100.99 WHERE id = 'prod006' 
+
+-- Editando todas as propriedades de um produto
+
+UPDATE products
+SET
+    name = 'Mouse pad',
+    price = 100.00,
+    description = 'Confortável',
+    image_url = 'https://picsum.photos/seed/Monitor/400'
+WHERE id = 'prod006';
