@@ -157,3 +157,5 @@ SET
     description = 'Confortável',
     image_url = 'https://picsum.photos/seed/Monitor/400'
 WHERE id = 'prod006';
+
+--
