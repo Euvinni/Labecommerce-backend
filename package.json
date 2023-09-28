@@ -8,7 +8,7 @@
     "dev": "ts-node-dev src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Matheus Christ",
+  "author": "Vinícius Correia",
   "license": "ISC",
   "devDependencies": {
     "@types/cors": "^2.8.14",
