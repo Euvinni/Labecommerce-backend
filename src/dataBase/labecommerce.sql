@@ -152,10 +152,59 @@ UPDATE products SET price = 100.99 WHERE id = 'prod006'
 
 UPDATE products
 SET
+    id = 'prod007',
     name = 'Mouse pad',
     price = 100.00,
     description = 'Confortável',
     image_url = 'https://picsum.photos/seed/Monitor/400'
-WHERE id = 'prod006';
+WHERE id = 'prod002';
 
-----
+-- Criando tabela de compradores
+
+CREATE TABLE
+    purchases (
+        id TEXT PRIMARY KEY UNIQUE NOT NULL,
+        buyer_id TEXT NOT NULL,
+        total_price REAL NOT NULL,
+        created_at DATETIME DEFAULT (
+            strftime(
+                '%Y-%m-%d %H:%M:%S',
+                'now',
+                'localtime'
+            )
+        ),
+        FOREIGN KEY (buyer_id) REFERENCES users(id)
+    );
+
+DROP TABLE purchases;
+
+-- Inserindo na tabela de compradores
+
+INSERT INTO
+    purchases (id, buyer_id, total_price)
+VALUES ('p01', 'u001', 250.00), ('p02', 'u002', 100.00);
+
+SELECT * FROM purchases;
+
+ALTER TABLE purchases ADD COLUMN product_description TEXT;
+
+UPDATE purchases
+SET
+    product_description = 'Descrição do Produto 1'
+WHERE id = 'p01';
+
+UPDATE purchases
+SET
+    product_description = 'Descrição do Produto 2'
+WHERE id = 'p02';
+
+SELECT
+    p.id AS id_da_compra,
+    u.id AS id_de_quem_fez_a_compra,
+    u.name AS nome_de_quem_fez_a_compra,
+    u.email AS email_de_quem_fez_a_compra,
+    p.total_price AS preco_total_da_compra,
+    p.created_at AS data_da_compra
+FROM purchases AS p
+    JOIN users AS u ON p.buyer_id = u.id
+WHERE p.id = 'p01';
