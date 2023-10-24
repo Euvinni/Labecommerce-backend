@@ -1,4 +1,4 @@
--- Active: 1695774689715@@127.0.0.1@3306
+-- Active: 1698107848814@@127.0.0.1@3306
 
 -- Criação da tabela users
 
@@ -60,7 +60,7 @@ VALUES (
         'u001',
         'SpaceToday',
         'space_today@email',
-        'idkfa',
+        'space234',
         'O usuário foi criado às ' || strftime(
             '%Y-%m-%d %H:%M:%S',
             'now',
@@ -70,7 +70,7 @@ VALUES (
         'u002',
         'franklin',
         'franklin@email',
-        '123qwe',
+        'fk2789',
         'O usuário foi criado às ' || strftime(
             '%Y-%m-%d %H:%M:%S',
             'now',
@@ -80,7 +80,7 @@ VALUES (
         'u003',
         'ciriguelo',
         'ciriguelo@email',
-        'qwe123',
+        'ciri2859',
         'O usuário foi criado às ' || strftime(
             '%Y-%m-%d %H:%M:%S',
             'now',
@@ -166,6 +166,8 @@ CREATE TABLE
         id TEXT PRIMARY KEY UNIQUE NOT NULL,
         buyer_id TEXT NOT NULL,
         total_price REAL NOT NULL,
+        product_id TEXT,
+        product_description TEXT,
         created_at DATETIME DEFAULT (
             strftime(
                 '%Y-%m-%d %H:%M:%S',
@@ -173,7 +175,8 @@ CREATE TABLE
                 'localtime'
             )
         ),
-        FOREIGN KEY (buyer_id) REFERENCES users(id)
+        FOREIGN KEY (buyer_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY (product_id) REFERENCES products(id) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
 DROP TABLE purchases;
@@ -182,7 +185,7 @@ DROP TABLE purchases;
 
 INSERT INTO
     purchases (id, buyer_id, total_price)
-VALUES ('p01', 'u001', 250.00), ('p02', 'u002', 100.00), ('p03', 'u003', 5.00), ('p04', 'u003', 80.00);
+VALUES ('pur01', 'u001', 250.00), ('pur02', 'u002', 100.00), ('pur03', 'u003', 5.00), ('pur04', 'u003', 80.00);
 
 SELECT * FROM purchases;
 
@@ -228,7 +231,7 @@ INSERT INTO
         product_id,
         quantity
     )
-VALUES ('p01', 'c01', 2), ('p02', 'c02', 1), ('p03', 'c03', 1), ('p04', 'c04', 3);
+VALUES ('pur01', 'p01', 2), ('pur02', 'p02', 1), ('pur03', 'p03', 1), ('pur04', 'p04', 3);
 
 SELECT
     purchases.id AS id_compra,
