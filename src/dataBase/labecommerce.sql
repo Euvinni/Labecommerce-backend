@@ -1,4 +1,4 @@
--- Active: 1695774689715@@127.0.0.1@3306
+-- Active: 1698107848814@@127.0.0.1@3306
 
 -- Criação da tabela users
 
@@ -60,7 +60,7 @@ VALUES (
         'u001',
         'SpaceToday',
         'space_today@email',
-        'idkfa',
+        'space234',
         'O usuário foi criado às ' || strftime(
             '%Y-%m-%d %H:%M:%S',
             'now',
@@ -70,7 +70,7 @@ VALUES (
         'u002',
         'franklin',
         'franklin@email',
-        '123qwe',
+        'fk2789',
         'O usuário foi criado às ' || strftime(
             '%Y-%m-%d %H:%M:%S',
             'now',
@@ -80,7 +80,7 @@ VALUES (
         'u003',
         'ciriguelo',
         'ciriguelo@email',
-        'qwe123',
+        'ciri2859',
         'O usuário foi criado às ' || strftime(
             '%Y-%m-%d %H:%M:%S',
             'now',
@@ -103,40 +103,40 @@ INSERT INTO
         image_Url
     )
 VALUES (
-        'prod001',
-        'Placa de vídeo RTX 4090Ti',
+        'p01',
+        'Produto 1',
         18.999,
-        'Roda tudo',
+        'Descrição 1',
         'https://picsum.photos/seed/Mouse%20gamer/400'
     ), (
-        'prod002',
-        'Echo Dot 5ª geração Amazon',
+        'p02',
+        'Produto 2',
         359.99,
-        'Escuta tudo',
+        'Descrição 2',
         'https://picsum.photos/seed/Mouse%20gamer/400'
     ), (
-        'prod003',
-        'Teclado Mecânico Gamer HyperX',
+        'p03',
+        'Produto 3',
         429.99,
-        'Nem o Frank Aguiar tem um assim',
+        'Descrição 3',
         'https://picsum.photos/seed/Monitor/400'
     ), (
-        'prod004',
-        'Apple Watch S8',
+        'p04',
+        'Produto 4',
         5849.10,
-        'Prefiro gastar na RTX 4090Ti, pelo menos roda tudo',
+        'Descrição 4',
         'https://picsum.photos/seed/Mouse%20gamer/400'
     ), (
-        'prod005',
-        'SSD 1TB Kingston KC3000',
+        'p05',
+        'Produto 5',
         549.99,
-        'Prova de que o dinheiro compra tempo',
+        'Descrição 5',
         'https://picsum.photos/seed/Monitor/400'
     ), (
-        'prod006',
-        'Pasta térmica',
+        'p06',
+        'Produto 6',
         89.99,
-        'Cuidados com o superaquecimento',
+        'Descrição 6',
         'https://picsum.photos/seed/Monitor/400'
     );
 
@@ -146,18 +146,18 @@ SELECT * FROM products WHERE name = 'Placa de vídeo RTX 4090Ti';
 
 -- Editando o produto pelo preço
 
-UPDATE products SET price = 100.99 WHERE id = 'prod006' 
+UPDATE products SET price = 100.99 WHERE id = 'p06' 
 
 -- Editando todas as propriedades de um produto
 
 UPDATE products
 SET
-    id = 'prod007',
-    name = 'Mouse pad',
+    id = 'p07',
+    name = 'Produto 7',
     price = 100.00,
-    description = 'Confortável',
+    description = 'Descrição 7',
     image_url = 'https://picsum.photos/seed/Monitor/400'
-WHERE id = 'prod002';
+WHERE id = 'p02';
 
 -- Criando tabela de compradores
 
@@ -166,6 +166,8 @@ CREATE TABLE
         id TEXT PRIMARY KEY UNIQUE NOT NULL,
         buyer_id TEXT NOT NULL,
         total_price REAL NOT NULL,
+        product_id TEXT,
+        product_description TEXT,
         created_at DATETIME DEFAULT (
             strftime(
                 '%Y-%m-%d %H:%M:%S',
@@ -173,7 +175,8 @@ CREATE TABLE
                 'localtime'
             )
         ),
-        FOREIGN KEY (buyer_id) REFERENCES users(id)
+        FOREIGN KEY (buyer_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY (product_id) REFERENCES products(id) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
 DROP TABLE purchases;
@@ -182,7 +185,7 @@ DROP TABLE purchases;
 
 INSERT INTO
     purchases (id, buyer_id, total_price)
-VALUES ('p01', 'u001', 250.00), ('p02', 'u002', 100.00);
+VALUES ('pur01', 'u001', 250.00), ('pur02', 'u002', 100.00), ('pur03', 'u003', 5.00), ('pur04', 'u003', 80.00);
 
 SELECT * FROM purchases;
 
@@ -208,3 +211,41 @@ SELECT
 FROM purchases AS p
     JOIN users AS u ON p.buyer_id = u.id
 WHERE p.id = 'p01';
+
+-- Criando tabela de compradores para usar com INER JOIN
+
+CREATE TABLE
+    purchases_products (
+        purchase_id TEXT NOT NULL,
+        product_id TEXT NOT NULL,
+        quantity INTEGER NOT NULL,
+        FOREIGN KEY (purchase_id) REFERENCES purchases(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY (product_id) REFERENCES products(id) ON UPDATE CASCADE ON DELETE CASCADE
+    );
+
+DROP TABLE purchases_products;
+
+INSERT INTO
+    purchases_products (
+        purchase_id,
+        product_id,
+        quantity
+    )
+VALUES ('pur01', 'p01', 2), ('pur02', 'p02', 1), ('pur03', 'p03', 1), ('pur04', 'p04', 3);
+
+SELECT
+    purchases.id AS id_compra,
+    users.id AS id_usuario,
+    users.name AS nome_usuario,
+    users.email AS email_usuario,
+    products.id AS id_produto,
+    products.name AS nome_produto,
+    products.price AS preco_produto,
+    products.description AS descrição_produto,
+    purchases_products.quantity AS quantidade_produto,
+    purchases.total_price AS preco_total_compra,
+    purchases.created_at AS data_da_compra
+FROM purchases
+    INNER JOIN users ON purchases.buyer_id = users.id
+    INNER JOIN purchases_products ON purchases.id = purchases_products.purchase_id
+    INNER JOIN products ON purchases_products.product_id = products.id;

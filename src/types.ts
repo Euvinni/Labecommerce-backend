@@ -11,5 +11,5 @@ export type TUser = {
     name: string,
     price: number,
     description: string,
-    imageUrl: string
+    image_Url: string
   };

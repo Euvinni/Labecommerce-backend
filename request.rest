@@ -1,0 +1,18 @@
+GET http://localhost:3003/users
+###
+
+DELETE http://localhost:3003/users/u002
+Content-Type: application/json
+
+###
+
+PUT http://localhost:3003/products/p03
+Content-Type: application/json
+
+{
+    "name": "Mesa Gamer10",
+    "price": 499.99,
+    "description": "Mesa gamer top10",
+    "image_url": "https://teste2103/teste23/mesagamer3/teste"
+}
+###
