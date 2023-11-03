@@ -1,88 +1,86 @@
 # labecommerce-backend
 
-Labecommerce Back-End Project
-O Projeto Labecommerce é uma API desenvolvida para gerenciar transações de um e-commerce, incorporando todos os princípios essenciais de criação de uma API conectada a um banco de dados real.
+# Projeto Labecommerce Back-End
 
-Tabela de Conteúdo
-Documentação da API no Postman
-Lista de Requisitos
-Funcionalidades
-Tutorial de Uso
-Instalação
-Tecnologias Utilizadas
-Documentação da API no Postman
-Link para a Documentação da API no Postman
+O Projeto Labecommerce é uma API desenvolvida para gerenciar as transações de um e-commerce, onde foram utilizados todos os fundamentos de criação de uma API conectada a um banco de dados real.
 
-Lista de Requisitos
-Obter todos os usuários
-Obter todos os produtos
-Pesquisar produtos por ID
-Pesquisar compras por ID
-Criar um usuário
-Criar um produto
-Criar uma compra
-Excluir usuário por ID
-Excluir produto por ID
-Excluir compra por ID
-Editar produto por ID
-Funcionalidades
-Para Usuários:
-Consultar a listagem total de usuários
-Cadastrar um novo usuário
-Deletar um usuário existente
-Para Produtos:
-Consultar a listagem total de produtos
-Consultar produtos pelo nome
-Cadastrar um novo produto
-Deletar um produto existente
-Para Pedidos:
-Consultar um pedido pelo ID
-Criar um novo pedido
-Deletar um pedido existente
-Tutorial de Uso
-Baixe ou clone o repositório em seu computador.
+![Tabela](https://user-images.githubusercontent.com/29845719/241974620-b446bbb0-bc9c-42d9-be04-b9ce1d605bd4.png)
 
-Abra a pasta do repositório no terminal do Git e execute o seguinte comando para instalar as dependências do projeto:
+### [Link para Documentação da API no Postman](https://documenter.getpostman.com/view/28316157/2s9YRCXrrK)
 
-css
-Copy code
+## Lista de requisitos
+
+- [x] Get all users
+- [x] Get all products
+- [x] Search Products by id
+- [x] Search Purchase by id
+- [x] Create user
+- [x] Create product
+- [x] Create purchase
+- [x] Delete user by id
+- [x] Delete product by id
+- [x] Delete purchase by id
+- [x] Edit product by id
+
+## Essa API de E-commerce contém as seguintes funcionalidades:
+
+- Para Usuários:
+
+  - Consultar a listagem total
+  - Cadastrar
+  - Deletar
+
+- Para Produtos:
+
+  - Consultar a listagem total
+  - Consultar pelo nome
+  - Cadastrar
+  - Deletar
+
+- Para Pedidos:
+  - Consultar pelo id
+  - Cadastrar
+  - Deletar
+
+## Tutorial de uso:
+
+```bash
+
+1. Baixe ou clone o repositório em seu computador.
+
+2. Abra a pasta do repositório no terminal do Git e execute o seguinte comando para instalar as dependências do projeto:
 $ npm install && code .
-Abra o Visual Studio Code (Vscode) e, no terminal integrado do Vscode, digite o seguinte comando para iniciar o servidor em modo de desenvolvimento:
 
-arduino
-Copy code
+3. Abra o Visual Studio Code (Vscode) e, no terminal integrado do Vscode, digite o seguinte comando para iniciar o servidor em modo de desenvolvimento:
 $ npm run dev
-Em seguida, abra o aplicativo Postman e insira o link da API no topo da interface.
 
-Com o servidor sendo executado na porta 3003, você poderá utilizar a API livremente para interagir com o projeto.
+4. Em seguida, abra o aplicativo Postman e insira o link da API no topo da interface.
 
-Instalação
-Para instalar e executar o projeto, siga os passos abaixo:
+5. Com o servidor sendo executado na porta 3003, você poderá utilizar a API livremente para interagir com o projeto.
 
-Instale todas as dependências:
+```
 
-ruby
-Copy code
+### Instalação
+
+```bash
+# Instale todas as dependências
 $ npm install
-Execute o projeto em modo de desenvolvimento:
 
-arduino
-Copy code
+# Execute o projeto
 $ npm run dev
-A aplicação será iniciada na porta 3003.
 
-Use algum cliente de API (por exemplo, Postman) para realizar as requisições.
+# A aplicação será iniciada na porta 3003
 
-Tecnologias Utilizadas
-O projeto utiliza as seguintes tecnologias e ferramentas:
+# Use algum API Client para realizar as requisições
+```
 
-NodeJS
-Typescript
-Express
-SQL e SQLite (banco de dados)
-Knex (query builder)
-Postman (para testar a API)
-Git (controle de versão)
+## Tecnologias Utilizadas
 
-Link da documentação:
-https://documenter.getpostman.com/view/28316157/2s9YRCXrrK
+- NodeJS
+- Typescript
+- Express
+- SQL e SQLite
+- Knex
+- Postman
+- Git
+  
